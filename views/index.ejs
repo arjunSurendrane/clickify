@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body class="bg-gray-100">
+    <div>
+      <div>
+        <h1
+          class="text-3xl font-bold text-gray-500 grid place-content-center mt-10"
+        >
+          Shrink Your URL here
+        </h1>
+      </div>
+      <div class="grid place-content-center mt-10">
+        <form class="w-full max-w-sm" id="shrinkForm">
+          <div class="flex items-center border-b border-teal-500 py-2">
+            <input
+              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+              type="text"
+              id="urlData"
+              placeholder="Entr url"
+              aria-label="Full name"
+            />
+            <button
+              class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+              type="submit"
+            >
+              Shrink
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="grid place-content-center mt-10">
+        <div>
+          <div class="grid place-content-center">
+            <p class="font-bold text-gray-500" id="newLinkHeading"></p>
+          </div>
+          <a href="" id="shrinkedLink" class="text-sm text-blue-500"></a>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const form = document.getElementById("shrinkForm");
+    const shrinkedLink = document.getElementById("shrinkedLink");
+    const newLinkHeading = document.getElementById("newLinkHeading");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      console.log("here");
+      const url = document.getElementById("urlData").value;
+      const res = await axios.post("http://localhost:3000/api/v1/shrink", {
+        url,
+      });
+      const { shortURL } = res.data;
+      shrinkedLink.innerHTML = shortURL;
+      shrinkedLink.href = shortURL;
+      newLinkHeading.innerHTML = "New Link";
+    });
+  </script>
+</html>
