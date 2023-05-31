@@ -11,7 +11,7 @@ export const urlShortner = catchAsync(async (req, res) => {
   const { url } = req.body;
   const baseUrl = process.env.BASE_URL;
   const data = await saveShortenedLink(url);
-  res.json({ shortURL: `${baseUrl}${data.shortLink}/ly` });
+  res.json({ shortURL: `${baseUrl}/${data.shortLink}/ly` });
 });
 
 /**
