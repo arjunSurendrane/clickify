@@ -54,7 +54,7 @@
       event.preventDefault();
       console.log("here");
       const url = document.getElementById("urlData").value;
-      const res = await axios.post("http://localhost:3000/api/v1/shrink", {
+      const res = await axios.post("https://clickify.onrender.com/api/v1/shrink", {
         url,
       });
       const { shortURL } = res.data;
